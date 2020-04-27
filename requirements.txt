@@ -1,0 +1,4 @@
+discord.py
+nekos.py
+requests
+random2
