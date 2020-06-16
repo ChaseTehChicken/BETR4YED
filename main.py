@@ -5,7 +5,7 @@ import json
 import logging
 import nekos
 import requests
-from bs4 import BeautifulSoup as Soup
+import asyncio
 from discord.ext import commands
 from discord.ext import tasks
 from itertools import cycle
@@ -13,6 +13,7 @@ from itertools import cycle
 joinlink = 'https://bit.ly/Betr4yz'
 
 client = commands.Bot(command_prefix= "[]")
+client.remove_command('help')
 logging.basicConfig(level=logging.INFO)
 status = cycle(["Sub 2 Bet", f"Become a member of Bet {joinlink}", "Join bets stream some time"])
 
@@ -47,6 +48,8 @@ async def load(ctx, extension):
 @client.event
 async def on_member_join(member):
     print(f'{member} Has joined the betr4yl squad!')
+    #role = discord.utils.get(ctx.guild.roles, name = "member")
+    #await ctx.add_roles(role)
 
 @client.event
 async def on_member_remove(member):
@@ -56,4 +59,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('NzAzOTM5NDgyMDI1NzIxODc3.Xqj24w.ZI8Lrpr-j0MTAIj5vene7iMFOuc')
+client.run('TOKEN')
