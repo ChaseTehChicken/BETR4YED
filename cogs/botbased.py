@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-version = "0.1.4"
+version = "0.1.7"
 dpyVersion = discord.__version__
 serverCount = 2
 memberCount = 0
@@ -25,6 +25,7 @@ class BotBased(commands.Cog):
         embed.set_footer(text=f"Carpe Noctem | {self.client.user.name}")
         embed.set_author(name=self.client.user.name, icon_url=self.client.user.avatar_url)
         await ctx.send(embed=embed)
+        print(f'{ctx.author.name} used command Stats')
 
 def setup(client):
     client.add_cog(BotBased(client))

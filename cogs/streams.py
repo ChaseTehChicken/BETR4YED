@@ -21,6 +21,10 @@ class streams(commands.Cog):
     @commands.command()
     async def twitch(self, ctx):
         await ctx.send(f'Follow Betr4ys on twitch!: {TwitchLink}')
+    
+    @commands.command()
+    async def codegenerator(self, ctx):
+        await ctx.send()
 
     
 def setup(client):
