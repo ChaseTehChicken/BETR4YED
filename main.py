@@ -10,12 +10,19 @@ from discord.ext import commands
 from discord.ext import tasks
 from itertools import cycle
 
+with open("prefixes.json") as f:
+    prefixes = json.load(f)
+default_prefix = "]["
+
 joinlink = 'https://bit.ly/Betr4yz'
 
-client = commands.Bot(command_prefix= "[]")
+client = commands.Bot(command_prefix=commands.when_mentioned_or("[]"))
 client.remove_command('help')
 logging.basicConfig(level=logging.INFO)
-status = cycle(["Sub 2 Bet", f"Become a member of Bet {joinlink}", "Join bets stream some time"])
+status = cycle(["Sub 2 Chaseyy on yt!", "OwO whats this?", "[]invite", "[]help"])
+
+# Bets Server ID: 668359349076361267
+# Vancitys Server ID: 675285751138877464
 
 @client.event
 async def on_ready():
@@ -32,7 +39,7 @@ async def on_command_error(ctx, error):
     if ctx.author.id == 420454043593342977:
         await ctx.channel.send(f"Error: {error}")
     else:
-        ctx.channel.send('Theres an error here, contact @Chaseyy#9999, or a someone from the bot dev team for help')
+        await ctx.channel.send('Theres an error here, contact @Chaseyy#9999, or a someone from the bot dev team for help')
 
 @client.command
 @commands.is_owner()
@@ -46,8 +53,8 @@ async def load(ctx, extension):
 
 
 @client.event
-async def on_member_join(member):
-    print(f'{member} Has joined the betr4yl squad!')
+async def on_member_join(ctx, member):
+    print(f'{member} Has joined {ctx.guild}')
     #role = discord.utils.get(ctx.guild.roles, name = "member")
     #await ctx.add_roles(role)
 
@@ -55,8 +62,21 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print(f'{member} has left the betr4yl squad')
 
+@client.event
+async def on_member_update(before, after):
+    n = after.nick
+    if n:
+        if n.lower().count("bet") > 0:
+            last = before.nick
+            if last:
+                await after.edit(nick=last)
+            else:
+                await after.edit(nick="THERE CAN ONLY BE ONE!")
+
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
+
+# Adding to update file for token :)
 
 client.run('TOKEN')

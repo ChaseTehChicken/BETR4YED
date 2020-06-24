@@ -7,6 +7,8 @@ Discord = 'https://discord.gg/9VP9JCP'
 TwitterLink = 'https://twitter.com/Betr4ys'
 SubLink = 'https://bit.ly/Sub2Bet'
 
+#ignore change
+
 class social(commands.Cog):
     def __init__(self, client):
         self.client = client
