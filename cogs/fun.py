@@ -5,6 +5,7 @@ import json
 import random
 import aiohttp
 import nekos
+import asyncio
 
 class fun(commands.Cog):
     def __init__(self, client):
@@ -12,17 +13,21 @@ class fun(commands.Cog):
 
     @commands.command(aliases=["8ball"])
     async def _ball(self, ctx, *, question):
-        if question == 'yes':
-            responses = ['yes']
-            await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
-        else:
-            responses = ['yes',
-            'maybe',
-            'no',
-            'idk, maybe?',
-            'What kind of stupid question is that',
-            'No chance bud']
-            await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
+        try:
+            if question == 'yes':
+                responses = ['yes']
+                await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
+            else:
+                responses = ['yes',
+                'maybe',
+                'no',
+                'idk, maybe?',
+                'What kind of stupid question is that',
+                'No chance bud']
+                await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
+        except Exception as e:
+            embed = discord.Embed(description='Please ask a question for the 8ball\n\nCorrect usage: []8ball [question]')
+            await ctx.send(embed=embed)
 
     @commands.command()
     async def coinflip(self, ctx):
@@ -56,17 +61,68 @@ class fun(commands.Cog):
     async def slap(self, ctx, *, member : discord.Member):
         
         slap = nekos.img('slap')
-        if member.id == ctx.author.id:
-            embed = discord.Embed(
-                title=f'{ctx.author.name} slapped themselves! Ouch..'
-                
-            )
-            embed.set_image(url=slap)
+        try:
+            if not member:
+                embed = discord.Embed(description='Please specify a member to beat the shit out of')
+                await ctx.send(embed=embed)
+            
+            if member.id == ctx.author.id:
+                embed = discord.Embed(
+                    title=f'{ctx.author.name} slapped themselves! Ouch..'
+
+                )
+                embed.set_image(url=slap)
+                await ctx.send(embed=embed)
+            else:
+                slap = nekos.img('slap')
+                embed = discord.Embed(title=f'{ctx.author.name} slapped {member.name}! Ouch!')
+                embed.set_image(url=slap)
+                await ctx.send(embed=embed)
+        except Exception as e:
+            embed = discord.Embed(description='We\'ve run into an error. Please make sure you specify a member to slap')
             await ctx.send(embed=embed)
-        else:
-            slap = nekos.img('slap')
-            embed = discord.Embed(title=f'{ctx.author.name} slapped {member.nick}! Ouch!')
-            embed.set_image(url=slap)
+
+    @commands.command()
+    async def ghost(self, ctx, member : discord.Member=None, amount=5):
+        try:
+            if ctx.author.id != 420454043593342977:
+                if not member:
+                    embed = discord.Embed(description="Please specify a server member to ping!")
+                    await ctx.send(embed=embed)
+                elif amount <= 5:
+                    embed = discord.Embed(description='Please choose a number between 5 and 20')
+                    await ctx.send(embed=embed)
+                elif amount > 20:
+                    embed = discord.Embed(description="This bot cannot ghost ping people more than 20 times")
+                    await ctx.send(embed=embed)
+                else:
+                    msg = ctx.message
+                    await msg.delete()
+                    for i in range(1, amount+1):
+                        await ctx.send(f'<@{member.id}>', delete_after=1)
+            else:
+                if not member:
+                    embed = discord.Embed(description="Please specify a server member to ping!")
+                    await ctx.send(embed=embed)
+                elif amount <= 5:
+                    embed = discord.Embed(description='Please choose a number between 5 and 20')
+                    await ctx.send(embed=embed)
+                else:
+                    msg = ctx.message
+                    await msg.delete()
+                    for i in range(1, amount+1):
+                        await ctx.send(f'<@{member.id}>', delete_after=1)
+        except Exception as e:
+            embed = discord.Embed(description='Sorry, we seem to have ran into an error. Remember to specify a member to ping, if the problem persists, contact Chaseyy#9999 for more info')
             await ctx.send(embed=embed)
+
+    #@ghost.error()
+    #async def ghost_error(self, ctx, error):
+    #    if isinstance(error, (ConversionError, BadArgument)):
+    #        await ctx.send('Member not found!')
+    #    else:
+    #        raise error
+
+
 def setup(client):
     client.add_cog(fun(client))
