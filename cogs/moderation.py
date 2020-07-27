@@ -1,3 +1,10 @@
+####################################
+#
+# This Cog is no longer in use as this bot was made as a Fun bot. Im going to keep it here
+# For educational purposes... and because there are things in here i need.
+#
+####################################
+
 import discord
 from discord.ext import commands
 import asyncio
