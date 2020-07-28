@@ -6,6 +6,7 @@ import random
 import aiohttp
 import nekos
 import asyncio
+import uwuify
 
 class fun(commands.Cog):
     def __init__(self, client):
@@ -250,15 +251,9 @@ class fun(commands.Cog):
 
     @commands.command()
     async def uwuify(self, ctx, *, args):
-        try:
-            msg = args.replace('l', 'w')
-            msgg = msg.replace('love', 'wuv')
-            await asyncio.sleep(2)
-            msggg = msgg.replace('r', 'w')
-            msgggg = msgg.replace('you', 'chu')
-            await ctx.send(msgggg + ' uwu')
-        except Exception as e:
-            await ctx.send('I couldn\'t make that more uwu ;-; pls try again')
+        flags = uwuify.SMILEY | uwuify.YU
+        await ctx.send(uwuify.uwu(args, flags=flags))
+
 
 def setup(client):
     client.add_cog(fun(client))
