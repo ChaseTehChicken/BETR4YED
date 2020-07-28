@@ -4,9 +4,6 @@ from discord.ext import commands
 version = "0.1.7"
 dpyVersion = discord.__version__
 
-global swears
-swears = ['fuck', 'shit', 'faggot', 'nigger', 'retard', 'dumbass', 'bitch']
-
 class BotBased(commands.Cog):
     def __init__(self, client):
         self.client = client
