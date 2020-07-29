@@ -19,10 +19,7 @@ joinlink = 'https://bit.ly/Betr4yz'
 client = commands.Bot(command_prefix=commands.when_mentioned_or("[]"))
 client.remove_command('help')
 logging.basicConfig(level=logging.INFO)
-status = cycle(["Sub 2 Chaseyy on yt!", "OwO whats this?", "[]invite", "[]help"])
-
-# Bets Server ID: 668359349076361267
-# Vancitys Server ID: 675285751138877464
+status = cycle(["[] | Sub 2 Chaseyy on yt!", "[] | OwO whats this?", "[]invite", "[]help"])
 
 @client.event
 async def on_ready():
@@ -35,11 +32,13 @@ async def change_status():
     await client.change_presence(activity=discord.Game(next(status)))
 
 @client.event
-async def on_command_error(ctx, error):
-    if ctx.author.id == 420454043593342977:
-        await ctx.channel.send(f"Error: {error}")
-    else:
-        await ctx.channel.send('Theres an error here, contact @Chaseyy#9999, or a someone from the bot dev team for help')
+async def on_command_error(ctx, exception):
+    error = getattr(exception, "original", exception)
+    if isinstance(error, discord.NotFound):
+        return
+    elif isinstance(error, discord.Forbidden):
+        return
+    elif isinstance() ## Finishing @ block 3
 
 @client.command
 @commands.is_owner()
