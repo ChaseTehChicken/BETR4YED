@@ -1,2 +1,3 @@
-# JASON BOT FOR DISCORD
-A terrible discord bot designed to meme
+# Super Epic DiscordBoat :^)
+
+## Add it to your server! Or dont! I dont care!
