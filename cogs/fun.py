@@ -253,6 +253,9 @@ class fun(commands.Cog):
     async def uwuify(self, ctx, *, args):
         flags = uwuify.SMILEY | uwuify.YU
         await ctx.send(uwuify.uwu(args, flags=flags))
+    
+    @commands.command()
+    async def # finishing soon
 
 
 def setup(client):
