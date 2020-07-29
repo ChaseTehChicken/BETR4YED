@@ -38,7 +38,13 @@ async def on_command_error(ctx, exception):
         return
     elif isinstance(error, discord.Forbidden):
         return
-    elif isinstance() ## Finishing @ block 3
+    elif isinstance(exception, commands.BadArgument):
+        return
+    elif isinstance(exception, commands.CommandNotFound):
+        await ctx.send(f'We couldn\'t find that command :(\n\nPlease try again or use []help')
+    elif isinstance(exception, commands.MissingRequireArgument):
+        await ctx.send(f'Command is missing required argument :(')
+    return
 
 @client.command
 @commands.is_owner()
@@ -51,26 +57,11 @@ async def load(ctx, extension):
 #        await ctx.send('Command Unavaliable')
 
 
-@client.event
-async def on_member_join(ctx, member):
-    print(f'{member} Has joined {ctx.guild}')
+#@client.event
+#async def on_member_join(ctx, member):
+#    print(f'{member} Has joined {ctx.guild}')
     #role = discord.utils.get(ctx.guild.roles, name = "member")
     #await ctx.add_roles(role)
-
-@client.event
-async def on_member_remove(member):
-    print(f'{member} has left the betr4yl squad')
-
-@client.event
-async def on_member_update(before, after):
-    n = after.nick
-    if n:
-        if n.lower().count("bet") > 0:
-            last = before.nick
-            if last:
-                await after.edit(nick=last)
-            else:
-                await after.edit(nick="THERE CAN ONLY BE ONE!")
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
