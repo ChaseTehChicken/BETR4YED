@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-version = "0.1.7"
+version = "2.0.1"
 dpyVersion = discord.__version__
 
 class BotBased(commands.Cog):
@@ -60,6 +60,19 @@ class BotBased(commands.Cog):
         embed = discord.Embed(title=f'Suggestion from {ctx.author.name}!', description=f'{args}')
         await channel.send(embed=embed)
         await ctx.send(f'Thanks for your feedback!')
+    
+    @commands.command()
+    async def whatsnew(self, ctx):
+        if ctx.author.id == 420454043593342977:
+            await ctx.message.delete()
+            embed = discord.Embed(title=f'Update V{version}', description='''```
+Main points this update:
+    - Renamed to uwu bot (cos i like that better than JASON)
+    - uwuify is now more uwu
+
+More coming soon!
+```''')
+        await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(BotBased(client))

@@ -147,40 +147,6 @@ class fun(commands.Cog):
         except Exception as e:
             embed = discord.Embed(description='There was a problem with your command. Specify a member to poke, and try again')
 
-    # @commands.command()
-    # async def ghost(self, ctx, member : discord.Member=None, amount=5):
-    #     try:
-    #         if ctx.author.id != 420454043593342977:
-    #             if not member:
-    #                 embed = discord.Embed(description="Please specify a server member to ping!")
-    #                 await ctx.send(embed=embed)
-    #             elif amount <= 5:
-    #                 embed = discord.Embed(description='Please choose a number between 5 and 20')
-    #                 await ctx.send(embed=embed)
-    #             elif amount > 20:
-    #                 embed = discord.Embed(description="This bot cannot ghost ping people more than 20 times")
-    #                 await ctx.send(embed=embed)
-    #             else:
-    #                 msg = ctx.message
-    #                 await msg.delete()
-    #                 for i in range(1, amount+1):
-    #                     await ctx.send(f'<@{member.id}>', delete_after=1)
-    #         else:
-    #             if not member:
-    #                 embed = discord.Embed(description="Please specify a server member to ping!")
-    #                 await ctx.send(embed=embed)
-    #             elif amount <= 5:
-    #                 embed = discord.Embed(description='Please choose a number between 5 and 20')
-    #                 await ctx.send(embed=embed)
-    #             else:
-    #                 msg = ctx.message
-    #                 await msg.delete()
-    #                 for i in range(1, amount+1):
-    #                     await ctx.send(f'<@{member.id}>', delete_after=1)
-    #     except Exception as e:
-    #         embed = discord.Embed(description='Sorry, we seem to have ran into an error. Remember to specify a member to ping, if the problem persists, contact Chaseyy#9999 for more info')
-    #         await ctx.send(embed=embed)
-
     @commands.command()
     async def gaymeter(self, ctx, member : discord.Member=None):
         try:

@@ -6,29 +6,57 @@ class help(commands.Cog):
         self.client = client
     
     @commands.command(aliases=['helpme', 'commands'])
-    async def help(self, ctx):
-        embed = discord.Embed(title='Command Help :)')
-        embed.add_field(name='[]help', value='Shows this embed')
-        embed.add_field(name='[]invite', value='Invite the bot to your server')
-        embed.add_field(name='[]ping', value='Get the bots latency to the discord API')
-        embed.add_field(name='[]8ball (question)', value='Asks the magic 8ball a question')
-        embed.add_field(name='[]coinflip', value='Flips a coin')
-        embed.add_field(name='[]clap (text)', value='Sends text with *Sass*')
-        embed.add_field(name='[]slap (@member)', value='Slaps a member')
-        embed.add_field(name='[]hug (@member)', value='Hugs a member :)')
-        embed.add_field(name='[]cuddle (@member)', value='Cuddles with a member.. aww :)')
-        embed.add_field(name='[]kiss (@member)', value='Kiss a member :)')
-        embed.add_field(name='[]poke (@member)', value='Poke someone')
-        embed.add_field(name='[]ghost @member', value='Ghost a ping a member up to 20 times')
-        embed.add_field(name='[]gaymeter (@member)', value='Find out how gay you or your friends are!')
-        embed.add_field(name='[]epicgamerrate (@member)', value='Find out how much of an epic gamer you and your friends are')
-        embed.add_field(name='[]simpmeter (@member)', value='Find out how much of a simp you and your friends are')
-        embed.add_field(name='[]google (question)', value='Shows you how to google something without asking me..')
-        embed.add_field(name='[]uwuify (text)', value='(BETA) Makes text more uwu')
-        embed.add_field(name='[]stats', value='Get the bot stats')
-        embed.add_field(name='[]source', value='Sends a link to the bots source code!')
-        embed.add_field(name='[]suggest', value='Suggest new bot features')
-        await ctx.send(embed=embed)
+    async def help(self, ctx, *, args=None):
+        try:
+            if not args:
+                embed = discord.Embed(title='uwu bot help uwu', color=0xfa00e9)
+                embed.add_field(name='[]help fun', value='super fun commands help')
+                embed.add_field(name='[]help mod', value='moderation commands help')
+                embed.add_field(name='[]help util', value='Bot based commands')
+                await ctx.send(embed=embed)
+
+            if args == 'fun':
+                embed = discord.Embed(title='Fun Commands Help page')
+                embed.add_field(name='[]8ball (question)', value='Asks the magic 8ball a question')
+                embed.add_field(name='[]coinflip', value='Flips a coin')
+                embed.add_field(name='[]clap (text)', value='Sends text with *Sass*')
+                embed.add_field(name='[]slap (@member)', value='Slaps a member')
+                embed.add_field(name='[]hug (@member)', value='Hugs a member :)')
+                embed.add_field(name='[]cuddle (@member)', value='Cuddles with a member.. aww :)')
+                embed.add_field(name='[]kiss (@member)', value='Kiss a member :)')
+                embed.add_field(name='[]poke (@member)', value='Poke someone')
+                embed.add_field(name='[]gaymeter (@member)', value='Find out how gay you or your friends are!')
+                embed.add_field(name='[]epicgamerrate (@member)', value='Find out how much of an epic gamer you and your friends are')
+                embed.add_field(name='[]simpmeter (@member)', value='Find out how much of a simp you and your friends are')
+                embed.add_field(name='[]google (question)', value='Shows you how to google something without asking me..')
+                embed.add_field(name='[]uwuify (text)', value='(BETA) Makes text more uwu')
+                await ctx.send(embed=embed)
+                return
+            elif args == 'mod':
+                embed = discord.Embed(title='uwu bot moderation commands uwu', description='You need the correct permissions for each command. e.g ban_members for banning, manage_roles for muting etc.')
+                embed.add_field(name='[]ban (@member) reason (optional)', value='Ban naughty people')
+                embed.add_field(name='[]unban (user#0000)', value='Unban people that have learned their lesson')
+                embed.add_field(name='[]mute (@member)', value='Mute people from chatting in the whole server')
+                embed.add_field(name='[]unmute (@member)', value='Unmute people after they learn their lesson')
+                embed.add_field(name='[]kick (@member)', value='Kicks a member from the server without banning them')
+                embed.add_field(name='[]purge (2-100)', value='Delete up to 100 messages from the channel')
+                embed.add_field(name='[]block (@member)', value='Block a member from chatting in the channel this command was used in, without muting the member')
+                embed.add_field(name='[]unblock (@member)', value='Unblocks member from the channel')
+                await ctx.send(embed=embed)
+                return
+            elif args == 'util':
+                embed = discord.Embed(title='uwu bot utility commands uwu')
+                embed.add_field(name='[]stats', value='Shows the uwu bot stats')
+                embed.add_field(name='[]source', value='check uwu bots source code. pls dont steal ;-;')
+                embed.add_field(name='[]ping', value='shows uwu bots ping to the discordboat api')
+                embed.add_field(name='[]invite', value='invite uwu bot to your server')
+                embed.add_field(name='[]suggest (suggestion)', value='suggest an uwu bot feature or command')
+                await ctx.send(embed=embed)
+
+            else:
+                raise commands.BadArgument()
+        except Exception as e:
+            return
 
 def setup(client):
     client.add_cog(help(client))
