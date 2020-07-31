@@ -10,10 +10,6 @@ from discord.ext import commands
 from discord.ext import tasks
 from itertools import cycle
 
-
-
-joinlink = 'https://bit.ly/Betr4yz'
-
 client = commands.Bot(command_prefix=commands.when_mentioned_or("[]"))
 client.remove_command('help')
 # logging.basicConfig(level=logging.INFO)
@@ -50,18 +46,6 @@ async def on_command_error(ctx, exception):
 @commands.is_owner()
 async def load(ctx, extension):
     client.load_extension(f'cogs.{extension}') 
-
-#@load.error
-#async def clear_error(ctx, error):
-#    if isinstance(error, commands.MissingRequiredArgument):
-#        await ctx.send('Command Unavaliable')
-
-
-#@client.event
-#async def on_member_join(ctx, member):
-#    print(f'{member} Has joined {ctx.guild}')
-    #role = discord.utils.get(ctx.guild.roles, name = "member")
-    #await ctx.add_roles(role)
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
