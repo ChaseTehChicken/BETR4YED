@@ -1,3 +1,9 @@
-# Super Epic DiscordBoat :^)
+# uwu boat discord boat :^)
 
-## Add it to your server! Or dont! I dont care!
+This is the source code for uwu bot on discord. I suggest adding it to youe server ;)
+
+Its very basic, I'm not very good at this. 
+
+Note: Self hosting not recommended
+
+### YES
