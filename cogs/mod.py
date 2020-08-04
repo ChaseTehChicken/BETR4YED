@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
+import sqlite3
 
-global muted
+global mute
 
 class Sinner(commands.Converter):
     async def convert(self, ctx, argument):
@@ -20,7 +21,7 @@ class Redeemed(commands.Converter):
             return argument 
         else:
             raise commands.BadArgument("The user was not muted.")
-            
+
 async def mute(ctx, user, reason):
     role = discord.utils.get(ctx.guild.roles, name="Muted") 
     if not role: 
@@ -76,6 +77,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_roles=True)
     async def mute(self, ctx, user: Sinner, reason=None):
+        """Gives them hell."""
         await mute(ctx, user, reason or "treason") 
         await ctx.send(f'{user} was muted for {reason}')
 
@@ -94,6 +96,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, limit: int):
+        """Bulk deletes messages"""
 
         await ctx.purge(limit=limit + 1) 
         await ctx.send(f"Bulk deleted `{limit}` messages", delete_after=5) 
@@ -101,6 +104,7 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(manage_roles=True)
     async def unmute(self, ctx, user: Redeemed):
+        """Unmutes a muted user"""
         await user.remove_roles(discord.utils.get(ctx.guild.roles, name="Muted"))
         await ctx.send(f"{user.mention} has been unmuted")
         return
@@ -123,7 +127,47 @@ class Moderation(commands.Cog):
             return await ctx.send("You must specify a user")
         
         await ctx.channel.set_permissions(user, send_messages=True)
-        await ctx.channel.send(f'{user} was unblocked in the channel :D')
+
+    @commands.command(aliases=["user", "whois", "i", "ui"])
+    @commands.guild_only()
+    @commands.cooldown(1, 4, commands.BucketType.user)
+    async def userinfo(self, ctx, user: discord.Member = None):
+        """Get a users info."""
+
+        if not user:
+            user = ctx.message.author
+        try:
+            playinggame = user.activity.title
+        except:
+            playinggame = None
+
+        server = ctx.message.guild
+        embed = discord.Embed(color=0xDEADBF)
+        embed.set_author(name=user.name, icon_url=user.avatar_url)
+        embed.add_field(name="ID", value=user.id)
+        embed.add_field(name="Discriminator", value=user.discriminator)
+        embed.add_field(name="Bot", value=str(user.bot))
+        embed.add_field(name="Created", value=user.created_at.strftime("%d %b %Y %H:%M"))
+        embed.add_field(name="Joined", value=user.joined_at.strftime("%d %b %Y %H:%M"))
+        embed.add_field(name="Animated Avatar", value=str(user.is_avatar_animated()))
+        embed.add_field(name="Playing", value=playinggame)
+        embed.add_field(name="Status", value=user.status)
+        embed.add_field(name="Color", value=str(user.color))
+
+        try:
+            roles = [x.name for x in user.roles if x.name != "@everyone"]
+
+            if roles:
+                roles = sorted(roles, key=[x.name for x in server.role_hierarchy
+                                           if x.name != "@everyone"].index)
+                roles = ", ".join(roles)
+            else:
+                roles = "None"
+            embed.add_field(name="Roles", value=roles)
+        except:
+            pass
+
+        await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(Moderation(client))

@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-version = "2.0.1"
+version = "2.1.1"
 dpyVersion = discord.__version__
 
 class BotBased(commands.Cog):
@@ -33,7 +33,7 @@ class BotBased(commands.Cog):
 
     @commands.command(aliases=['source'])
     async def github(self, ctx):
-        embed = discord.Embed(description='[View the source code for JASON (Formerly BETR4YED) here :)](https://github.com/ChaseTehChicken/BETR4YED)')
+        embed = discord.Embed(description='[View the source code for uwu bot here :)](https://github.com/ChaseTehChicken/uwu-bot)')
         await ctx.send(embed=embed)
     
     @commands.command()
@@ -67,10 +67,13 @@ class BotBased(commands.Cog):
             await ctx.message.delete()
             embed = discord.Embed(title=f'Update V{version}', description='''```
 Main points this update:
-    - Renamed to uwu bot (cos i like that better than JASON)
-    - uwuify is now more uwu
+    - Added tweet command! **[]tweet [username] [tweet text]** :)
+    - Added PHComment command! **[]phcomment [comment]** :)
+    - Added ship command! **[]ship [@user1] [@user2]** :) Gives them a love rating ;)
 
-More coming soon!
+coming next update:
+    - Customisable welcome messages
+    - More imagegen commands!
 ```''')
         await ctx.send(embed=embed)
 

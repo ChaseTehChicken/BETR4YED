@@ -30,6 +30,15 @@ class help(commands.Cog):
                 embed.add_field(name='[]simpmeter (@member)', value='Find out how much of a simp you and your friends are')
                 embed.add_field(name='[]google (question)', value='Shows you how to google something without asking me..')
                 embed.add_field(name='[]uwuify (text)', value='(BETA) Makes text more uwu')
+                embed.add_field(name='[]phcomment (comment)', value='Generate a fake pronhub comment')
+                embed.add_field(name='[]ship (@member1) (@member2)', value='Get a love rating on two users, or a user and yourself')
+                embed.add_field(name='[]tweet (username) (comment)', value='Generate a fake tweet with any username!')
+                embed.add_field(name='[]bodypillow (@member)', value='Turn a user into a bodypillow')
+                embed.add_field(name='[]baguette (@member)', value='Baguette') 
+                embed.add_field(name='[]deepfry (@member)', value='Deepfry a users profile picture')
+                embed.add_field(name='[]shitpost', value='Gets a random shitpost using r/copypasta')
+                embed.add_field(name='[]changemymind (text)', value='Generates a ChangeMyMind meme with your text')
+                embed.add_field(name='[]meme', value='Gets a meme from either r/dankmemes or r/animemes') #This is Field 22! Maximum of 25!
                 await ctx.send(embed=embed)
                 return
             elif args == 'mod':
@@ -52,7 +61,6 @@ class help(commands.Cog):
                 embed.add_field(name='[]invite', value='invite uwu bot to your server')
                 embed.add_field(name='[]suggest (suggestion)', value='suggest an uwu bot feature or command')
                 await ctx.send(embed=embed)
-
             else:
                 raise commands.BadArgument()
         except Exception as e:
