@@ -9,6 +9,7 @@ The code is sloppy and shit and I'm not saying I'm a good programmer, but I coul
 Enjoy the code, don't try to release it as your own bot :^)
 
 [discord server](https://bit.ly/JASONDiscord)
+
 [Buy me a coffee :)](https://ko-fi.com/Chaseyy)
 
 ---
