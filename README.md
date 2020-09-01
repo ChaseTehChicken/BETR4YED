@@ -1,4 +1,4 @@
-# uwu boat discordboat
+# Lucid boat discordboat
 ---
 Super fun bot with a few API's and a tonne of commands.
 
