@@ -15,3 +15,7 @@ Enjoy the code, don't try to release it as your own bot :^)
 ---
 
 **Please note: Self hosting this bot is not recommened. There are a lot of things that won't work from a localhost. Please consider adding the bot to your server instead, or you can [buy a custom bot from me](https://ko-fi/Chaseyy).**
+
+---
+
+![Size](https://img.shields.io/github/repo-size/ChaseTehChicken/Lucid)
